@@ -5,6 +5,10 @@
  */
 package interfaz;
 
+import clases.Persona;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author jaime
@@ -14,8 +18,14 @@ public class Principal extends javax.swing.JFrame {
     /**
      * Creates new form Principal
      */
+    ArrayList<Persona> v = new ArrayList();
+
     public Principal() {
         initComponents();
+        cmdGuardar.setEnabled(true);
+        cmdLimpiar.setEnabled(true);
+        cmdListarMujeres.setEnabled(false);
+        cmdMostrar.setEnabled(false);
     }
 
     /**
@@ -36,7 +46,7 @@ public class Principal extends javax.swing.JFrame {
         txtPrimerNombre = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtPrimerApellido = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cmbSexo = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         cmdGuardar = new javax.swing.JButton();
@@ -45,7 +55,7 @@ public class Principal extends javax.swing.JFrame {
         cmdLimpiar = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtResultado = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,18 +70,49 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel2.setText("Identificacion:");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
+
+        txtIdentificacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdentificacionActionPerformed(evt);
+            }
+        });
+        txtIdentificacion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtIdentificacionKeyTyped(evt);
+            }
+        });
         jPanel2.add(txtIdentificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 60, -1));
 
         jLabel3.setText("Primer Nombre:");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
+
+        txtPrimerNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPrimerNombreActionPerformed(evt);
+            }
+        });
+        txtPrimerNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPrimerNombreKeyTyped(evt);
+            }
+        });
         jPanel2.add(txtPrimerNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 60, -1));
 
         jLabel4.setText("Primer Apellido:");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
+
+        txtPrimerApellido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPrimerApellidoKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPrimerApellidoKeyTyped(evt);
+            }
+        });
         jPanel2.add(txtPrimerApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 60, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Indefinido", "Masculino", "Femenino" }));
-        jPanel2.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, -1, -1));
+        cmbSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Indefinido", "Masculino", "Femenino" }));
+        jPanel2.add(cmbSexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, -1, -1));
 
         jLabel5.setText("Genero");
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
@@ -82,15 +123,35 @@ public class Principal extends javax.swing.JFrame {
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         cmdGuardar.setText("Guardar");
+        cmdGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdGuardarActionPerformed(evt);
+            }
+        });
         jPanel3.add(cmdGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 80, -1));
 
         cmdMostrar.setText("Mostrar");
+        cmdMostrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdMostrarActionPerformed(evt);
+            }
+        });
         jPanel3.add(cmdMostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, -1, -1));
 
         cmdListarMujeres.setText("Listar Mujeres");
+        cmdListarMujeres.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdListarMujeresActionPerformed(evt);
+            }
+        });
         jPanel3.add(cmdListarMujeres, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
 
         cmdLimpiar.setText("Limpiar");
+        cmdLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdLimpiarActionPerformed(evt);
+            }
+        });
         jPanel3.add(cmdLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 100, -1));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, 220, 170));
@@ -98,22 +159,20 @@ public class Principal extends javax.swing.JFrame {
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Resultado"));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextArea1.setEditable(false);
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txtResultado.setEditable(false);
+        txtResultado.setColumns(20);
+        txtResultado.setRows(5);
+        jScrollPane1.setViewportView(txtResultado);
 
-        jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 290, 110));
+        jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 290, 110));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, 310, 140));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, 310, 150));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 19, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,6 +184,158 @@ public class Principal extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(465, 415));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtIdentificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdentificacionActionPerformed
+
+
+    }//GEN-LAST:event_txtIdentificacionActionPerformed
+
+    private void txtIdentificacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdentificacionKeyTyped
+
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtIdentificacionKeyTyped
+
+    private void txtPrimerNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrimerNombreActionPerformed
+
+
+    }//GEN-LAST:event_txtPrimerNombreActionPerformed
+
+    private void txtPrimerNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrimerNombreKeyTyped
+
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtPrimerNombreKeyTyped
+
+    private void txtPrimerApellidoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrimerApellidoKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPrimerApellidoKeyPressed
+
+    private void txtPrimerApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrimerApellidoKeyTyped
+
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtPrimerApellidoKeyTyped
+
+    private void cmdGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdGuardarActionPerformed
+
+        if (txtIdentificacion.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Digite por favor la identificacion", "Falta un elemento", JOptionPane.ERROR_MESSAGE);
+            txtIdentificacion.requestFocusInWindow();
+        } else if (txtPrimerNombre.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Digite por favor el primer nombre", "Falta un elemento", JOptionPane.ERROR_MESSAGE);
+            txtPrimerNombre.requestFocusInWindow();
+        } else if (txtPrimerApellido.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Digite por favor el primer apellido", "Falta un elemento", JOptionPane.ERROR_MESSAGE);
+            txtPrimerApellido.requestFocusInWindow();
+        } else {
+            Persona p;
+
+            long identificacion = Long.parseLong(txtIdentificacion.getText());
+            String primer_nombre = txtPrimerNombre.getText();
+            String primer_apellido = txtPrimerApellido.getText();
+            String sexo = cmbSexo.getSelectedItem().toString();
+
+            p = new Persona(identificacion, primer_nombre, primer_apellido, sexo);
+            v.add(p);
+            JOptionPane.showMessageDialog(this, "Persona agregada exitosamente");
+            txtIdentificacion.setText("");
+            txtPrimerApellido.setText("");
+            txtPrimerNombre.setText("");
+            cmbSexo.setSelectedIndex(0);
+            txtIdentificacion.requestFocusInWindow();
+
+            cmdGuardar.setEnabled(true);
+            cmdLimpiar.setEnabled(true);
+            cmdListarMujeres.setEnabled(true);
+            cmdMostrar.setEnabled(true);
+
+        }
+
+    }//GEN-LAST:event_cmdGuardarActionPerformed
+
+    private void cmdMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdMostrarActionPerformed
+        txtResultado.setText("");
+        String auxiliar;
+
+        if (v.isEmpty()) {
+            txtResultado.setText("No hay personas que mostrar");
+        } else {
+
+            for (int i = 0; i < v.size(); i++) {
+
+                auxiliar = "Persona No." + (i + 1) + "\n"
+                        + "Identificacion: " + v.get(i).getIdentificacion() + "\n"
+                        + "Primer Nombre: " + v.get(i).getPrimer_nombre() + "\n"
+                        + "Primer Apellido: " + v.get(i).getPrimer_apellido() + "\n"
+                        + "Sexo: " + v.get(i).getSexo() + "\n\n";
+
+                txtResultado.append(auxiliar);
+            }
+
+        }
+        txtIdentificacion.requestFocusInWindow();
+
+    }//GEN-LAST:event_cmdMostrarActionPerformed
+
+    private void cmdListarMujeresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdListarMujeresActionPerformed
+        txtResultado.setText("");
+        String auxiliar;
+        int cont = 0;
+
+        if (v.isEmpty()) {
+            txtResultado.setText("No hay personas que mostrar");
+        } else {
+
+            for (int i = 0; i < v.size(); i++) {
+                if (v.get(i).getSexo().equalsIgnoreCase("Femenino")) {
+                    txtResultado.append("La Lista De Mujeres \n");
+                    auxiliar = "Persona No." + (i + 1) + "\n"
+                            + "Identificacion: " + v.get(i).getIdentificacion() + "\n"
+                            + "Primer Nombre: " + v.get(i).getPrimer_nombre() + "\n"
+                            + "Primer Apellido: " + v.get(i).getPrimer_apellido() + "\n"
+                            + "Sexo: " + v.get(i).getSexo() + "\n\n";
+                    cont++;
+                    txtResultado.append(auxiliar);
+                }
+            }
+            if (cont == 0) {
+                txtResultado.setText("No hay mujeres que mostrar");
+            }
+
+        }
+        txtIdentificacion.requestFocusInWindow();
+
+    }//GEN-LAST:event_cmdListarMujeresActionPerformed
+
+    private void cmdLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLimpiarActionPerformed
+        int op;
+        op = JOptionPane.showConfirmDialog(this, "¿Seguro que desea eliminar a las personas?", "Pregunta", JOptionPane.YES_NO_OPTION);
+        if (op == JOptionPane.YES_NO_OPTION) {
+            v.clear();
+            txtIdentificacion.setText("");
+            txtPrimerApellido.setText("");
+            txtPrimerNombre.setText("");
+            txtResultado.setText("");
+            cmbSexo.setSelectedIndex(0);
+
+            cmdGuardar.setEnabled(true);
+            cmdLimpiar.setEnabled(true);
+            cmdListarMujeres.setEnabled(false);
+            cmdMostrar.setEnabled(false);
+            txtIdentificacion.requestFocusInWindow();
+
+        }
+    }//GEN-LAST:event_cmdLimpiarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -162,11 +373,11 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cmbSexo;
     private javax.swing.JButton cmdGuardar;
     private javax.swing.JButton cmdLimpiar;
     private javax.swing.JButton cmdListarMujeres;
     private javax.swing.JButton cmdMostrar;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -177,9 +388,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField txtIdentificacion;
     private javax.swing.JTextField txtPrimerApellido;
     private javax.swing.JTextField txtPrimerNombre;
+    private javax.swing.JTextArea txtResultado;
     // End of variables declaration//GEN-END:variables
 }

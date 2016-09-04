@@ -15,16 +15,16 @@ public class Persona {
     private String primer_apellido;
     private String sexo;
     
-    public Persona(long identificacion, String primer_nombre, String primer_apellido){
+    public Persona(long identificacion, String primer_nombre, String primer_apellido,String sexo){
     
         this.identificacion = identificacion;
         this.primer_nombre = primer_nombre;
         this.primer_apellido = primer_apellido;
-        this.sexo = sexo;
+        this.sexo = sexo; 
         
     }
 
-    public long getIdentificacion() {
+     public long getIdentificacion() {
         return identificacion;
     }
 
